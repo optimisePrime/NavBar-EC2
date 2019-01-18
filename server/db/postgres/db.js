@@ -15,9 +15,9 @@ pool.connect((err) => {
   }
 })
 
-const getProducts = (req, res) => {
+const getProducts = (query) => {
   // const query = `SELECT * FROM search_bar_data where name=${}`;
-  console.log('REQ BODY', req.body)
+  console.log('Query', query)
 
 
 }

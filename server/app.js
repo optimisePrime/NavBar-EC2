@@ -1,3 +1,4 @@
+require('newrelic');
 const db = require('./db/db');
 const path = require('path');
 const express = require('express');
@@ -30,8 +31,8 @@ app.get('/categories', (req, res) => {
 
 app.get('/products/:category/:query', (req, res) => {
   const { query } = req.params;
-  getProducts();
-  
+  getProducts(query);
+
 });
 
 // 404

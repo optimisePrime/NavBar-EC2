@@ -8,6 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "genDB": "node server/db/csv/searchData.js",
     "build": "webpack --mode development --watch",
     "schema": "mysql -u student < server/db/schema.sql -p",
     "test-server": "jest --config ./server/tests/jest.config.json --detectOpenHandles",
@@ -16,12 +17,19 @@
     "start": "nodemon server/server.js"
   },
   "dependencies": {
+    "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
+    "cassandra-driver": "^4.0.0",
     "cors": "^2.8.5",
+    "csv-write-stream": "^2.0.0",
+    "elasticsearch": "^15.3.0",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.4",
+    "pg": "^7.8.0",
+    "pg-copy-streams": "^1.2.0",
+    "pg-pool": "^2.0.6",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "sequelize": "^4.42.0"
@@ -54,6 +62,6 @@
     "supertest": "^3.3.0",
     "webpack": "^4.28.0",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.14"
   }
 }

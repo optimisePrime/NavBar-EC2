@@ -1,13 +1,14 @@
-const Pool = require('pg').Pool;
+//const Pool = require('pg').Pool;
+const { Client } = require('pg');
 
-const pool = new Pool({
+const client = new Client({
   user: 'liamwilliams',
   host: 'localhost',
   database: 'search_bar_data',
   port: '5432',
 });
 
-pool.connect((err) => {
+client.connect((err) => {
   if(err) {
     console.log(err);
   } else {
@@ -17,10 +18,13 @@ pool.connect((err) => {
 
 const getProducts = (query) => {
   // const query = `SELECT * FROM search_bar_data where name=${}`;
-  console.log('Query', query)
-
-
-}
+  console.log(query);
+  client.query(`Select * from clothes where name like '%' || '${query}' || '%' limit 10`)
+    .then((result) => {
+      console.log(result);
+      return result;
+    });
+};
 
 const getCategories = (req, res) => {
   // const query = `SELECT category FROM search_bar_data where name=${}`

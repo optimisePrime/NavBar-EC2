@@ -17,6 +17,7 @@
     "start": "nodemon server/server.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "cassandra-driver": "^4.0.0",

@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import axios from 'axios';
 
 import Results from './Results.jsx';
 import Overlay from '../shared/Overlay.jsx';
@@ -28,9 +29,9 @@ class Search extends React.Component {
     document.addEventListener('mousedown', this.handleOutsideClick, false);
 
     // Fetch categories
-    fetch('http://localhost:3003/categories')
-      .then(resData => resData.json())
+    axios.get('http://localhost:3003/categories')
       .then((data) => {
+        console.log('DATA', data)
         const newCategories = data.categories.map(
           category => category.category[0].toUpperCase() + category.category.slice(1)
         );
@@ -53,7 +54,7 @@ class Search extends React.Component {
   onSubmit(query) {
     // Query server
     if (query !== '') {
-      fetch(`http://localhost:3003/products/${this.state.selectValue}/${query}`)
+      axios.get(`http://localhost:3003/products/${this.state.selectValue}/${query}`)
         .then(resData => resData.json())
         .then((data) => {
           console.log(data);

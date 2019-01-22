@@ -31,8 +31,7 @@ app.get('/categories', (req, res) => {
 
 app.get('/products/:category/:query', (req, res) => {
   const { query } = req.params;
-  getProducts(query);
-
+  res.send(getProducts(query));
 });
 
 // 404

@@ -1,13 +1,9 @@
 import http from 'k6/http';
-import { check } from "k6";
-import { sleep } from "k6";
-// { checkServerIdentity } from 'tls';
 
 
 export const options = {
-  vud: 100,
+  vus: 100,
   duration: '120s',
-
 };
 
 export default function () {

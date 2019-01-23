@@ -19,7 +19,7 @@ client.connect((err) => {
 const getProducts = (query) => {
   // const query = `SELECT * FROM search_bar_data where name=${}`;
   console.log(query);
-  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id < 1000000 limit 1 `)
+  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > 9900000 limit 1 `)
   // client.query(`Select * from electronics where name = '${query}' limit 10 `)
     .then((result) => {
       let resultArr = [];

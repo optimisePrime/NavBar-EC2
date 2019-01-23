@@ -19,6 +19,5 @@ export default function () {
   const category = categories[randomCategory];
 
   http.get(`http://localhost:3003/products/electronics/${choice}`);
-  
   // sleep(1);
 }

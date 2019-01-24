@@ -3,7 +3,7 @@ const { Client } = require('pg');
 
 const client = new Client({
   user: 'liamwilliams',
-  host: 'localhost',
+  host: '52.14.198.30',
   database: 'search_bar_data',
   port: '5432',
 });
@@ -19,7 +19,7 @@ client.connect((err) => {
 const getProducts = (query) => {
   // const query = `SELECT * FROM search_bar_data where name=${}`;
   console.log(query);
-  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > 9900000 limit 1 `)
+  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > 9900000 limit 5`)
   // client.query(`Select * from electronics where name = '${query}' limit 10 `)
     .then((result) => {
       let resultArr = [];

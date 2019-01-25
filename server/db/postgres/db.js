@@ -2,8 +2,9 @@
 const { Client } = require('pg');
 
 const client = new Client({
-  user: 'liamwilliams',
+  user: 'postgres',
   host: '52.14.198.30',
+  password: '',
   database: 'search_bar_data',
   port: '5432',
 });
@@ -18,15 +19,16 @@ client.connect((err) => {
 
 const getProducts = (query) => {
   // const query = `SELECT * FROM search_bar_data where name=${}`;
-  console.log(query);
-  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > 9900000 limit 5`)
+  //console.log(query);
+  let num = Math.floor(Math.random() * 5000000);
+  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > ${num} limit 5`)
   // client.query(`Select * from electronics where name = '${query}' limit 10 `)
     .then((result) => {
       let resultArr = [];
       for(let i = 0; i < result.rows.length; i++) {
         resultArr.push(result.rows[i].name);
       }
-      console.log(resultArr);
+    //  console.log(resultArr);
       return resultArr;
     });
 };

@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 const db = require('./db/db');
 const path = require('path');
 const express = require('express');
@@ -11,7 +11,7 @@ const redis = require('redis');
 const app = express();
 
 // REDIS
-/* const client = redis.createClient();
+ const client = redis.createClient('redis://3.16.14.107:6379');
 
 client.on('connect', () => {
   console.log('Redis client connected');
@@ -20,7 +20,7 @@ client.on('connect', () => {
 client.on('error', (err) => {
   console.log(err);
 });
-*/
+
 
 // const categoriesRouter = require('./routes/category.routes');
 // const productsRouter = require('./routes/product.routes');
@@ -45,10 +45,10 @@ app.get('/categories', (req, res) => {
 app.get('/products/:category/:query', (req, res) => {
   const { query } = req.params;
   client.get(query, (err, reply) => {
-    if (err) return err;
-    if (reply === null) {
+  if (err) return err;
+  if (reply === null) {
       const result = getProducts(query);
-      client.set([query, result]);
+      client.set([query, result, 'EX', 20]);
       res.send(result);
     } else {
       res.send(reply);

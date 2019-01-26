@@ -41,20 +41,42 @@ app.get('/categories', (req, res) => {
   res.send(getCategories());
 });
 
-
 app.get('/products/:category/:query', (req, res) => {
   const { query } = req.params;
-  client.get(query, (err, reply) => {
-  if (err) return err;
-  if (reply === null) {
-      const result = getProducts(query);
-      client.set([query, result, 'EX', 20]);
-      res.send(result);
-    } else {
-      res.send(reply);
-    }
-  });
+  // client.get(query, (err, reply) => {
+  //   if (err) return err;
+  //   if (reply === null) {
+      getProducts(query)
+        .then((result) => {
+          let resultArr = [];
+          for(let i = 0; i < result.rows.length; i++) {
+            resultArr.push(result.rows[i].name);
+          }
+          console.log(resultArr);
+          client.set([query, result]);
+          res.send(resultArr);
+        })
+        .catch(err => console.log(err))
+    // } else {
+    //   console.log('redis')
+    //   res.send(reply);
+    // }
+  // });
 });
+
+// app.get('/products/:category/:query', (req, res) => {
+//   const { query } = req.params;
+//   client.get(query, (err, reply) => {
+//   if (err) return err;
+//   if (reply === null) {
+//       const result = getProducts(query);
+//       client.set([query, result, 'EX', 20]);
+//       res.send(result);
+//     } else {
+//       res.send(reply);
+//     }
+//   });
+// });
 
 //   if (err) {
 //     return err;

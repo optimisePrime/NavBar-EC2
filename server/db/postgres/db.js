@@ -21,16 +21,7 @@ const getProducts = (query) => {
   // const query = `SELECT * FROM search_bar_data where name=${}`;
   //console.log(query);
   let num = Math.floor(Math.random() * 5000000);
-  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > ${num} limit 5`)
-  // client.query(`Select * from electronics where name = '${query}' limit 10 `)
-    .then((result) => {
-      let resultArr = [];
-      for(let i = 0; i < result.rows.length; i++) {
-        resultArr.push(result.rows[i].name);
-      }
-    //  console.log(resultArr);
-      return resultArr;
-    });
+  client.query(`Select * from electronics where name like '%' || '${query}' || '%' and id > ${num} limit 5`);
 };
 
 const getCategories = () => {
